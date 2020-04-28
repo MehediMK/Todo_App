@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete todo
+{% endblock %}
+
+
+{% block content %}
+
+{% if todo.manager == request.user %}
+<div class="container mt-5 offset-4 col-md-4">
+    <form action="" method="post">
+        <table class="table">
+            <tr>
+                <td>{{todo.todos}}</td>
+                <td>
+                    {% if todo.complete %}
+                    Complete
+                    {% else %}
+                    Not Complete
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-info px-4" value="Delete">
+    </form>
+</div>
+{% else %}
+<div class="container">
+    <h2 class="font-weight-light text-center"> Opps..! you don't have access this todo. <br>
+      Goto <a href="{% url 'home' %}">Home page</a>.
+    </h2>
+    <hr />
+  </div>
+{% endif %}
+
+
+{% endblock %}

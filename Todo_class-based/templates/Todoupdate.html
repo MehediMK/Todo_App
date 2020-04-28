@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Update page
+{% endblock %}
+
+
+{% block content %}
+{% if todo.manager == request.user %}
+    {% if todo %}
+    <div class="container mt-5 offset-4 col-md-4">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-info px-4" value="Update">
+        </form>
+    </div>
+    {% else %}
+    <div class="container">
+        <h2 class="font-weight-light text-center"> Opps..! you don't have access this todo. <br>
+          Goto <a href="{% url 'home' %}">Home page</a>.
+        </h2>
+        <hr />
+      </div>
+    {% endif %}
+    
+{% else %}
+<div class="container">
+    <h2 class="font-weight-light text-center"> Opps..! you don't have access this todo. <br>
+      Goto <a href="{% url 'home' %}">Home page</a>.
+    </h2>
+    <hr />
+  </div>
+{% endif %}
+
+{% endblock %}
